@@ -2,6 +2,7 @@
 import numpy as np
 import scipy
 import matcompat
+from os import chdir,listdir
 
 # if available import pylab (from matlibplot)
 try:
@@ -11,8 +12,10 @@ except ImportError:
 
 def stackstoroi(save_fld, sd):
 
-    # Local Variables: I_bw2, I_cum, I_bw1, I, I_overlay, locs, CC, i, j, img_content, I_edge, m_bloc, I_mean, marks, save_fld, sd
-    # Function calls: save, stackstoroi, mad, findpeaks, cat, bwareaopen, length, edge, bwconncomp, importdata, max, threshold, mode, cd, dir, mean
+    # Local Variables: I_bw2, I_cum, I_bw1, I, I_overlay, locs, CC, i,
+    # j, img_content, I_edge, m_bloc, I_mean, marks, save_fld, sd
+    # Function calls: save, stackstoroi, mad, findpeaks, cat, bwareaopen,
+    #  length, edge, bwconncomp, importdata, max, threshold, mode, cd, dir, mean
     #% STACKSTOROI(image_fld,sd) loads *I*.mat from save_fld for image
     #% segmentation. sd is how many standard deviations above the mean the 
     #% threshold is set for segmentation.  Outputs:
@@ -22,13 +25,13 @@ def stackstoroi(save_fld, sd):
     #% I_overlay: overlay of identified ROI over I_mean
     #%Example:
     #% [CC,I_mean,I_bw2,I_overlay] = stackstoroi(save_fld,sd);
-    cd(save_fld)
-    m_bloc = dir('*I*.mat*')
-    I_cum = np.array([])
+    chdir(save_fld)
+    m_bloc = listdir('*I*.mat*')
+    i_cum = np.array([])
     img_content = np.array([])
-    if length(m_bloc) == 11.:
-        for i in np.arange(1., 12.0):
-            I_cum = cat(3., I_cum, importdata((m_bloc[int(i)-1].name)))
+    if length(m_bloc) == 11:
+        for i in np.arange(1, 12.0):
+            i_cum = cat(3, i_cum, importdata((m_bloc[int(i)-1].name)))
             
     else:
         I_cum = importdata((m_bloc[0].name))

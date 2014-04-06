@@ -3,10 +3,14 @@ import numpy as np
 import scipy
 import matcompat
 
-# if available import pylab (from matlibplot)
-try:
-    import matplotlib.pylab as plt
-except ImportError:
-    pass
+image_fld = 'C:\Users\rka2p\Desktop\Calcium analysis\file_folder'
+save_fld = 'C:\Users\rka2p\Desktop\Calcium analysis\save_folder'
+imagestostacks(image_fld,save_fld)
 
-#%m-file for batch processing of calcium data
+#sd from  mean of image intensity to set as threshold
+sd = 7
+[CC,I_mean,I_bw2,I_overlay] = stackstoroi(save_fld,sd)
+imagesc(I_overlay)
+axis off
+[data,bkg] = roitodata(save_fld)
+figure; plot(data)

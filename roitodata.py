@@ -16,7 +16,7 @@ def roitodata(save_fld):
     #% ROITODATA(save_fld) loads CC from save_fld for data extraction from I.mat
     #%Example:
     #% [data,bkg] = roitodata(save_fld)
-    cd(save_fld)
+    os.chdir(save_fld)
     np.load('CC.mat')
     m_bloc = dir('*I*.mat')
     data = np.array([])
