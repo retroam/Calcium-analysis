@@ -1,7 +1,9 @@
 import numpy as np
 from skimage import measure
 import os
+from typing import List, Tuple
 
+def roi_to_data(roi_file: str, image_file: str) -> Tuple[List[float], List[float]]:
 def roi_to_data(roi_file, image_file):
     """
     Extract data from regions of interest in an image stack.
