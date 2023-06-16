@@ -1,7 +1,9 @@
 import numpy as np
 from skimage import filters, measure, segmentation, feature, io
 from scipy import ndimage as ndi
+from typing import Tuple
 
+def stack_to_roi(image_path: str, sd: float) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
 def stack_to_roi(image_path, sd):
     """
     Perform image segmentation on an image stack.
