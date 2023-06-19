@@ -29,5 +29,17 @@ python calcium_analysis/data_extraction.py
 ```
 
 This script extracts data from regions of interest in an image stack and saves the results.
+32: 5. Similarly, you can run the other scripts in the `calcium_analysis` directory. Each script has a specific function in the calcium imaging analysis pipeline. For more information on what each script does, refer to the comments in the script files.
 
-5. Similarly, you can run the other scripts in the `calcium_analysis` directory. Each script has a specific function in the calcium imaging analysis pipeline. For more information on what each script does, refer to the comments in the script files.
+## Command Line Interface
+
+You can also run the package as a command line interface using the main function in the cli.py file. Here's the command to do this:
+
+```bash
+python -m calcium_analysis.cli --image_fld <path_to_image_folder> --save_fld <path_to_save_folder> --sd <standard_deviation_value>
+```
+
+Where:
+- `--image_fld` is the path to the image folder.
+- `--save_fld` is the path to the save folder.
+- `--sd` is the standard deviation value.
