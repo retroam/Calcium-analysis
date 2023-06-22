@@ -1,5 +1,5 @@
 import click
-from .run_analysis import run_analysis
+from .analysis import run_analysis
 @click.command()
 @click.option('--image_fld', required=True, help='Path to the image folder.')
 @click.option('--save_fld', required=True, help='Path to the save folder.')
