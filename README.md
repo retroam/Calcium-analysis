@@ -25,7 +25,7 @@ pip install -r requirements.txt
 4. Run the scripts in the `calcium_analysis` directory. For example, to run the `data_extraction.py` script, use the following command:
 
 ```bash
-python calcium_analysis/data_extraction.py
+python calcium_analysis/run_analysis.py
 ```
 
 This script extracts data from regions of interest in an image stack and saves the results.

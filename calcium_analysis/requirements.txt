@@ -3,3 +3,4 @@ imageio
 scikit-image
 scipy
 imageio
+click
