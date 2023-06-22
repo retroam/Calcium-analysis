@@ -1,7 +1,6 @@
 import imageio.v3 as iio
 from skimage import filters, measure, segmentation, feature, io
 from scipy import ndimage as ndi
-import matplotlib.pyplot as plt
 from PIL import Image
 from PIL.TiffTags import TAGS
 import numpy as np
