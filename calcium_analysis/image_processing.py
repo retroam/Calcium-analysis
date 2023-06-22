@@ -1,9 +1,10 @@
 import imageio.v3 as iio
-from skimage import filters, measure, segmentation, feature, io
 from scipy import ndimage as ndi
 from PIL import Image
 from PIL.TiffTags import TAGS
 import numpy as np
+import os
+import xml.etree.ElementTree as ET
 
 def load_image(image_path):
     """
@@ -23,21 +24,24 @@ def image_to_stack(image_fldr, save_fldr):
     I_t = []
 
     for j, image_file in enumerate(image_files, 1):
-        image_path = os.path.join(image_fld, image_file)
+        image_path = os.path.join(image_fldr, image_file)
         print(f"Loading image {j} of {image_count} from {image_path}")
         
         I, info = load_image(image_path)
+     
+        root = ET.fromstring(info['ImageDescription'][0])
+        num_images = root.find(".//prop[@id='number-of-planes']").get('value')
+
         num_images = len(info)
-        image_shape = (info[0]['ImageLength'], info[0]['ImageWidth'], num_images)
+        image_shape = (info['ImageLength'][0], info['ImageWidth'][0], num_images)
         print(f"Image has shape {image_shape}")
 
-        I_cum = np.zeros(image_shape)
-        for k in range(num_images):
-            I_cum[:, :, k] = I
+        I_cum = iio.imread(uri=image_path)
+       
         I_t.append(I_cum)
 
     I_t = np.concatenate(I_t, axis=2)
 
-    output_path = os.path.join(save_fld, 'I.npy')
+    output_path = os.path.join(save_fldr, 'I.npy')
     print(f"Saving output to {output_path}")
     np.save(output_path, I_t)
