@@ -15,5 +15,4 @@ def test_roi_to_data():
     assert len(data) == 10
     assert isinstance(bkg, list)
     assert len(bkg) == 10
-```
 
