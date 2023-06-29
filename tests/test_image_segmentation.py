@@ -16,5 +16,5 @@ def test_stack_to_roi():
     assert I_mean.shape == (100, 100)
     assert isinstance(I_bw2, np.ndarray)
     assert I_bw2.shape == (100, 100)
-```
+
 

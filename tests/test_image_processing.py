@@ -2,7 +2,7 @@ import unittest
 import numpy as np
 import os
 from PIL import Image
-import image_processing  # assuming the module is named image_processing.py
+import calcium_analysis.image_processing  # assuming the module is named image_processing.py
 
 class TestImageProcessing(unittest.TestCase):
     
