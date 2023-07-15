@@ -1,3 +1,4 @@
+[![Coverage Status](https://coveralls.io/repos/github/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME/badge.svg?branch=master)](https://coveralls.io/github/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME?branch=master)
 # Calcium-analysis
 Python implementation of calcium imaging analysis pipeline for cardiac myocytes for [Automated image analysis of cardiac myocyte Ca2+ dynamics](https://pubmed.ncbi.nlm.nih.gov/22255377/)
 ## How to use this package
