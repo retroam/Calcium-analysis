@@ -18,3 +18,5 @@ def test_stack_to_roi():
     assert I_bw2.shape == (100, 100)
 
 
+if __name__ == '__main__':
+    coverage.run('pytest.main()')
