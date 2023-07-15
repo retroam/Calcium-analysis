@@ -16,3 +16,5 @@ def test_roi_to_data():
     assert isinstance(bkg, list)
     assert len(bkg) == 10
 
+if __name__ == '__main__':
+    coverage.run('pytest.main()')
