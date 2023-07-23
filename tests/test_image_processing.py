@@ -1,4 +1,3 @@
-import coverage
 import unittest
 import numpy as np
 import os
@@ -18,4 +17,4 @@ class TestImageProcessing(unittest.TestCase):
         self.assertEqual(I.shape[1], info['ImageWidth'])
 
 if __name__ == '__main__':
-    coverage.run('unittest.main()')
+    unittest.main()
