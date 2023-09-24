@@ -9,6 +9,13 @@ def roi_to_data(roi_file: str, image_file: str) -> Tuple[List[float], List[float
     This function loads a labeled image (from a .npy file), computes
     the mean intensity of each labeled region in each image in a stack,
     and saves the results.
+
+    Parameters:
+    roi_file (str): The path to the .npy file containing the labeled image.
+    image_file (str): The path to the .npy file containing the image stack.
+
+    Returns:
+    Tuple[List[float], List[float]]: A tuple containing two lists. The first list contains the mean intensities of each region in each image. The second list contains the background intensities of each image.
     """
 
     # Load the labeled image and the image stack

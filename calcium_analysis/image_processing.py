@@ -6,9 +6,15 @@ import numpy as np
 import os
 import xml.etree.ElementTree as ET
 
-def load_image(image_path):
+def load_image(image_path: str) -> Tuple[np.ndarray, Dict[str, Any]]:
     """
-    Load an image and return its data and metadata
+    Load an image and return its data and metadata.
+
+    Parameters:
+    image_path (str): The path to the image file.
+
+    Returns:
+    Tuple[np.ndarray, Dict[str, Any]]: A tuple containing the image data and the metadata.
     """
     image = iio.imread(uri=image_path)
     with Image.open(image_path) as img:
@@ -16,8 +22,20 @@ def load_image(image_path):
 
     return image, info
 
-def image_to_stack(image_fldr, save_fldr):
-    """Assembles tif images in image_fld into a single numpy array."""
+def image_to_stack(image_fldr: str, save_fldr: str) -> None:
+    """
+    Assembles tif images in image_fld into a single numpy array and saves it to the save folder.
+
+    This function will load each tif image in the image folder, concatenate them into a single numpy array,
+    and save the array to a .npy file in the save folder.
+
+    Parameters:
+    image_fldr (str): The path to the folder containing the tif images.
+    save_fldr (str): The path to the folder where the .npy file will be saved.
+
+    Returns:
+    None
+    """
     image_files = [f for f in os.listdir(image_fldr) if f.endswith('.tif')]
     image_count = len(image_files)
     print(f"Processing {image_count} images...")
