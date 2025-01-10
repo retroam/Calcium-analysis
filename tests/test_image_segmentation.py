@@ -22,5 +22,18 @@ def test_stack_to_roi():
     # Delete the mock file after test
     os.remove('mock_image_stack.npy')
 
+    def test_invalid_sd():
+        """Test handling of invalid standard deviation parameter"""
+        with pytest.raises(ValueError):
+            stack_to_roi('mock_image_stack.npy', -1.0)
+        
+        with pytest.raises(ValueError):
+            stack_to_roi('mock_image_stack.npy', 'invalid')
+
+    def test_missing_file():
+        """Test handling of missing input file"""
+        with pytest.raises(ValueError):
+            stack_to_roi('nonexistent.npy', 1.0)
+
 if __name__ == '__main__':
     pytest.main()

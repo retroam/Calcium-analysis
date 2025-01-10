@@ -26,5 +26,21 @@ class TestImageProcessing(unittest.TestCase):
         self.assertEqual(I.shape[0], int(info['ImageLength'][0]))
         self.assertEqual(I.shape[1], int(info['ImageWidth'][0]))
 
+    def test_corrupt_image(self):
+        """Test handling of corrupt image files"""
+        # Create a corrupt image file
+        with open('corrupt.tif', 'wb') as f:
+            f.write(b'corrupt data')
+        
+        with self.assertRaises(ImageProcessingError):
+            load_image('corrupt.tif')
+        
+        os.remove('corrupt.tif')
+
+    def test_invalid_directories(self):
+        """Test handling of invalid directories"""
+        with self.assertRaises(ValueError):
+            image_to_stack('/nonexistent/path', '/tmp')
+
 if __name__ == '__main__':
     unittest.main()
