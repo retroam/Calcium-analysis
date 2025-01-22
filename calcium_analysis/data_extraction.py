@@ -1,8 +1,8 @@
+from typing import List, Tuple, NDArray
 import numpy as np
 from skimage import measure
-from typing import List, Tuple
 
-def roi_to_data(roi_file: str, image_file: str) -> Tuple[List[float], List[float]]:
+def roi_to_data(roi_file: str, image_file: str) -> Tuple[List[List[float]], List[float]]:
     """
     Extract data from regions of interest in an image stack.
 
@@ -15,33 +15,34 @@ def roi_to_data(roi_file: str, image_file: str) -> Tuple[List[float], List[float
     image_file (str): The path to the .npy file containing the image stack.
 
     Returns:
-    Tuple[List[float], List[float]]: A tuple containing two lists. The first list contains the mean intensities of each region in each image. The second list contains the background intensities of each image.
+    Tuple[List[List[float]], List[float]]: A tuple containing:
+        - List of lists with mean intensities for each region in each image
+        - List of background intensities for each image
     """
+    labels: NDArray = np.load(roi_file)
+    image_stack: NDArray = np.load(image_file)
 
-    # Load the labeled image and the image stack
-    labels = np.load(roi_file)
-    I_t = np.load(image_file)
-
-    # Extract data from each region in each image
-    data = []
-    bkg = []
-    for I in np.rollaxis(I_t, axis=2):
-        # Get properties of labeled regions
-        props = measure.regionprops(labels, intensity_image=I)
+    # Use list comprehension for better readability
+    data: List[List[float]] = []
+    background: List[float] = []
+    
+    for image in np.rollaxis(image_stack, axis=2):
+        props = measure.regionprops(labels, intensity_image=image)
         
-        # Compute the mean intensity of each region and the background
-        avg = [prop.mean_intensity for prop in props]
-        I_bkg = I.copy()
+        # Use generator expression for better memory efficiency
+        region_intensities = [prop.mean_intensity for prop in props]
+        
+        # Create background mask
+        background_mask = image.copy()
         for prop in props:
-            I_bkg[prop.coords[:, 0], prop.coords[:, 1]] = np.nan
-        bkg_intensity = np.nanmean(I_bkg)
+            background_mask[prop.coords[:, 0], prop.coords[:, 1]] = np.nan
+        background_intensity = float(np.nanmean(background_mask))
 
-        data.append(avg)
-        bkg.append(bkg_intensity)
+        data.append(region_intensities)
+        background.append(background_intensity)
 
-    # Save the results
+    # Save results
     np.save('data.npy', data)
-    np.save('bkg.npy', bkg)
+    np.save('bkg.npy', background)
 
-    # Return the results
-    return data, bkg
+    return data, background
