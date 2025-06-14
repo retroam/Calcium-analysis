@@ -44,3 +44,18 @@ Where:
 - `--image_fld` is the path to the image folder.
 - `--save_fld` is the path to the save folder.
 - `--sd` is the standard deviation value.
+## Pre-commit hooks
+
+This project uses [pre-commit](https://pre-commit.com/) to run `black`, `isort`, and `ruff` on your changes.
+Install pre-commit and set up the git hooks with:
+
+```bash
+pip install pre-commit
+pre-commit install
+```
+
+You can check all files at any time by running:
+
+```bash
+pre-commit run --all-files
+```
