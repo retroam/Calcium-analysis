@@ -1,4 +1,3 @@
-import os
 from .image_processing import image_to_stack
 from .data_extraction import roi_to_data
 from .image_segmentation import stack_to_roi

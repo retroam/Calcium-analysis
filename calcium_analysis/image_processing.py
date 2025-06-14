@@ -5,6 +5,7 @@ from PIL.TiffTags import TAGS
 import numpy as np
 import os
 import xml.etree.ElementTree as ET
+from typing import Tuple, Dict, Any
 
 def load_image(image_path: str) -> Tuple[np.ndarray, Dict[str, Any]]:
     """
